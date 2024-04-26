@@ -415,9 +415,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c204c39dc2c92747b4ba2b6afba871c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TimeTouch: []
-  TimeS: 0
-  clip: {fileID: 32900000, guid: d86a0cff74b8986459475c4962a31319, type: 3}
+  _timeTouch: []
+  _timeS: 0
+  _clip: {fileID: 32900000, guid: c9a550cb5a3c395438b6056ba5d55a7f, type: 3}
+  _clipPlayer: {fileID: 1361061685}
+  _textFile: {fileID: 4900000, guid: b72cfbe03512d1b488bd118a8c72a5ea, type: 3}
 --- !u!4 &1173136466
 Transform:
   m_ObjectHideFlags: 0
@@ -478,7 +480,7 @@ VideoPlayer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1361061683}
   m_Enabled: 1
-  m_VideoClip: {fileID: 32900000, guid: d86a0cff74b8986459475c4962a31319, type: 3}
+  m_VideoClip: {fileID: 32900000, guid: fdfc4cad2076d4240926b367a527df9f, type: 3}
   m_TargetCameraAlpha: 1
   m_TargetCamera3DLayout: 0
   m_TargetCamera: {fileID: 0}

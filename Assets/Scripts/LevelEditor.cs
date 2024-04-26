@@ -9,7 +9,13 @@ public class LevelEditor : MonoBehaviour
     [SerializeField] List<float> _timeTouch;
     [SerializeField] float _timeS;
     [SerializeField] VideoClip _clip;
+    [SerializeField] VideoPlayer _clipPlayer;
     [SerializeField] TextAsset _textFile;
+
+    private void Start()
+    {
+        _clipPlayer.clip = _clip;
+    }
 
     private void Update()
     {
@@ -20,7 +26,7 @@ public class LevelEditor : MonoBehaviour
             _timeTouch.Add(_timeS);
         }
 
-        if (Input.GetKeyDown(KeyCode.LeftArrow))
+        if (Input.GetKeyDown(KeyCode.Return))
         {
             WriteString(_timeTouch, _textFile);
         }

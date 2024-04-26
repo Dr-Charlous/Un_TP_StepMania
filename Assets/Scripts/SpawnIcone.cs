@@ -1,12 +1,12 @@
 using System.IO;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class SpawnIcone : MonoBehaviour
 {
     [SerializeField] GameObject[] _iconePrefab;
     [SerializeField] Transform _iconeParent;
-    [SerializeField] TextAsset _textFile;
     [SerializeField] SongManager _song;
 
     string[] _valuesText;
@@ -18,7 +18,7 @@ public class SpawnIcone : MonoBehaviour
 
     void Start()
     {
-        _valuesText = File.ReadAllLines(AssetDatabase.GetAssetPath(_textFile));
+        _valuesText = File.ReadAllLines(AssetDatabase.GetAssetPath(GameManager.Instance.TextFileLD));
         _time = 0;
 
         Valids = new GameObject[_valuesText.Length];

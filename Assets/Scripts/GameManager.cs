@@ -26,6 +26,7 @@ public class GameManager : MonoBehaviour
     public float ValuePass;
     public float ValueCorrect;
     public float ValuePerfect;
+    public TextAsset TextFileLD;
 
     [Header("")]
     [SerializeField] float _valueDamage;

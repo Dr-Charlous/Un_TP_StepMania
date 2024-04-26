@@ -1612,6 +1612,7 @@ MonoBehaviour:
   ValuePass: 0.65
   ValueCorrect: 0.25
   ValuePerfect: 0.1
+  TextFileLD: {fileID: 4900000, guid: 56cecd279069dd6428e7ece56711b945, type: 3}
   _valueDamage: -0.1
   _buttons:
   - {fileID: 284473973}
@@ -1976,7 +1977,6 @@ MonoBehaviour:
   - {fileID: 4016858009683878874, guid: 17d1c1312f3de4941927f991e752b2a3, type: 3}
   - {fileID: 479668938950500813, guid: 75795678acf3c754ca738e4f6dbd93a5, type: 3}
   _iconeParent: {fileID: 1392530352}
-  _textFile: {fileID: 4900000, guid: 56cecd279069dd6428e7ece56711b945, type: 3}
   _song: {fileID: 1990756035}
   Valids: []
 --- !u!1 &1480625180
@@ -2519,7 +2519,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1823975626
 RectTransform:
   m_ObjectHideFlags: 0
