@@ -1,3 +1,4 @@
+using DG.Tweening;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -26,16 +27,21 @@ public class GameManager : MonoBehaviour
     public float ValueCorrect;
     public float ValuePerfect;
 
+    [Header("")]
     [SerializeField] float _valueDamage;
     [SerializeField] Transform[] _buttons;
     [SerializeField] GameObject _icones;
 
+    [Header("")]
+    public GameObject ParticulePrefab;
+    public Transform ParticuleParent;
     public VideoClip clip;
     public VideoPlayer clipPlayer;
     public UI Ui;
     public SpawnIcone SpawnIcon;
     public int ActualI;
 
+    [Header("")]
     [Range(0f, 1f)]
     public float LifePoints;
 
@@ -59,6 +65,8 @@ public class GameManager : MonoBehaviour
                 Heal(0);
 
                 Ui.UpdateUi();
+
+                Particules("Miss", Color.red);
             }
         }
 
@@ -99,5 +107,13 @@ public class GameManager : MonoBehaviour
             GameOver();
 
         Ui.UpdateUi();
+    }
+
+    public void Particules(string text, Color color)
+    {
+        var P = Instantiate(ParticulePrefab, new Vector3(SpawnIcon.Valids[ActualI].transform.position.x, _buttons[0].position.y + 1.2f, 0), Quaternion.identity, ParticuleParent);
+        P.GetComponent<Particule>().TextText = text;
+        P.GetComponent<Particule>().ColorText = color;
+        P.transform.DOPunchScale(new Vector3(0.1f, 0.1f, 0.1f), 0.15f);
     }
 }

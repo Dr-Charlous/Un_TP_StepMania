@@ -43,25 +43,27 @@ public class Buttons : MonoBehaviour
                 GameManager.Instance.Heal(0);
 
                 GameManager.Instance.Ui.ComboValue = 0;
+
+                GameManager.Instance.Particules("Miss", Color.red);
             }
             else if (difference < valuePass && difference > -valuePass && icones.Valids[GameManager.Instance.ActualI].transform.position.x == transform.position.x)
             {
                 if (difference < valuePerfect && difference > -valuePerfect)
                 {
-                    Debug.Log("Parfait chef");
-                    GameManager.Instance.Heal(0.1f);
+                    GameManager.Instance.Particules("Perfect", Color.yellow);
+                    GameManager.Instance.Heal(0.3f);
                     scoreAdd = 100;
                 }
                 else if (difference < valueCorrect && difference > -valueCorrect)
                 {
-                    Debug.Log("Ca va frero");
-                    GameManager.Instance.Heal(0.05f);
+                    GameManager.Instance.Particules("Cool", Color.green);
+                    GameManager.Instance.Heal(0.2f);
                     scoreAdd = 50;
                 }
                 else if (difference < valuePass && difference > -valuePass)
                 {
-                    Debug.Log("Comment ca mon reuf ?");
-                    GameManager.Instance.Heal(0.01f);
+                    GameManager.Instance.Particules("Correct", Color.blue);
+                    GameManager.Instance.Heal(0.1f);
                     scoreAdd = 10;
                 }
 
