@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Video;
 
@@ -30,8 +28,10 @@ public class GameManager : MonoBehaviour
 
     [SerializeField] float _valueDamage;
     [SerializeField] Transform[] _buttons;
+    [SerializeField] GameObject _icones;
 
     public VideoClip clip;
+    public VideoPlayer clipPlayer;
     public UI Ui;
     public SpawnIcone SpawnIcon;
     public int ActualI;
@@ -46,21 +46,26 @@ public class GameManager : MonoBehaviour
 
     private void Update()
     {
-        if (SpawnIcon.Valids[GameManager.Instance.ActualI] != null)
+        if (SpawnIcon.Valids[ActualI] != null)
         {
-            if (_buttons[0].position.y - SpawnIcon.Valids[GameManager.Instance.ActualI].transform.position.y > ValuePass * 1.5f)
+            if (_buttons[0].position.y - SpawnIcon.Valids[ActualI].transform.position.y > ValuePass * 1.5f)
             {
-                GameManager.Instance.Ui.UpdateUi();
+                Ui.ComboValue = 0;
 
-                GameManager.Instance.Ui.ComboValue = 0;
+                Destroy(SpawnIcon.Valids[ActualI]);
+                if (ActualI < SpawnIcon.Valids.Length)
+                    ActualI++;
 
-                Destroy(SpawnIcon.Valids[GameManager.Instance.ActualI]);
-                if (GameManager.Instance.ActualI < SpawnIcon.Valids.Length)
-                    GameManager.Instance.ActualI++;
+                Heal(0);
+
+                Ui.UpdateUi();
             }
         }
 
-        Heal(0);
+        if (ActualI >= SpawnIcon.Valids.Length)
+        {
+            GameWin();
+        }
     }
 
     public void GameOver()
@@ -68,12 +73,31 @@ public class GameManager : MonoBehaviour
         if (LifePoints > 0)
             return;
 
-        Debug.Log("You dead");
+        clipPlayer.Pause();
+        Ui.LoseScreen.SetActive(true);
+
+        for (int i = 0; i < _buttons.Length; i++)
+        {
+            _buttons[i].gameObject.SetActive(false);
+        }
+        _icones.gameObject.SetActive(false);
+    }
+
+    public void GameWin()
+    {
+        clipPlayer.Pause();
+        Ui.WinScreen.SetActive(true);
     }
 
     public void Heal(float value)
     {
-        if (GameManager.Instance.LifePoints < 1)
-            GameManager.Instance.LifePoints += value + _valueDamage;
+        LifePoints += value + _valueDamage;
+
+        if (LifePoints > 1)
+            LifePoints = 1;
+        else if (LifePoints <= 0)
+            GameOver();
+
+        Ui.UpdateUi();
     }
 }

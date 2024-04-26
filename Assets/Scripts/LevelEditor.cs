@@ -1,38 +1,34 @@
-using System.Collections;
 using System.Collections.Generic;
 using System.IO;
-using System.Runtime.InteropServices;
-using System.Xml.Linq;
 using UnityEditor;
 using UnityEngine;
-using UnityEngine.UIElements;
 using UnityEngine.Video;
-using static UnityEngine.UIElements.UxmlAttributeDescription;
 
 public class LevelEditor : MonoBehaviour
 {
-    public List<float> TimeTouch;
-    public float TimeS;
-    public VideoClip clip;
+    [SerializeField] List<float> _timeTouch;
+    [SerializeField] float _timeS;
+    [SerializeField] VideoClip _clip;
+    [SerializeField] TextAsset _textFile;
 
     private void Update()
     {
-        TimeS += Time.deltaTime;
+        _timeS += Time.deltaTime;
 
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            TimeTouch.Add(TimeS);
+            _timeTouch.Add(_timeS);
         }
 
         if (Input.GetKeyDown(KeyCode.LeftArrow))
         {
-            WriteString(TimeTouch);
+            WriteString(_timeTouch, _textFile);
         }
 
         [MenuItem("Tools/Write file")]
-        static void WriteString(List<float> TimeTouch)
+        static void WriteString(List<float> TimeTouch, TextAsset _textFile)
         {
-            string path = "C:/Users/charles.piercourt/Documents/GitHub/Un_TP_StepMania/TextFile1.txt";
+            string path = AssetDatabase.GetAssetPath(_textFile);
             //Write some text to the test.txt file
             StreamWriter writer = new StreamWriter(path, true);
 

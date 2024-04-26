@@ -1,9 +1,5 @@
 using DG.Tweening;
-using System.Collections;
-using System.Collections.Generic;
-using TreeEditor;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 
 public class Buttons : MonoBehaviour
 {
@@ -39,7 +35,7 @@ public class Buttons : MonoBehaviour
             float difference = iconeY - buttonY;
             int scoreAdd = 0;
 
-            Debug.Log($" button y : {buttonY}\n icone y : {iconeY}\n difference : {difference}");
+            //Debug.Log($" button y : {buttonY}\n icone y : {iconeY}\n difference : {difference}");
 
             if (difference > valuePass)
             {
@@ -76,11 +72,12 @@ public class Buttons : MonoBehaviour
 
                 GameManager.Instance.Ui.ScoreValue += scoreAdd;
                 GameManager.Instance.Ui.ComboValue++;
-                GameManager.Instance.Ui.UpdateUi();
 
                 Destroy(icones.Valids[GameManager.Instance.ActualI]);
                 if (GameManager.Instance.ActualI < icones.Valids.Length)
                     GameManager.Instance.ActualI++;
+
+                GameManager.Instance.Ui.UpdateUi();
             }
         }
     }

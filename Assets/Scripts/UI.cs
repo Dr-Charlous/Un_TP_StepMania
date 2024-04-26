@@ -12,12 +12,19 @@ public class UI : MonoBehaviour
     [SerializeField] SongManager _song;
     [SerializeField] Image _LifeBar;
 
+    public GameObject WinScreen;
+    public GameObject LoseScreen;
+
     public int ScoreValue;
     public int ComboValue;
 
     private void Start()
     {
         _videoPlayer.clip = GameManager.Instance.clip;
+
+        WinScreen.SetActive(false);
+        LoseScreen.SetActive(false);
+
         UpdateUi();
     }
 
