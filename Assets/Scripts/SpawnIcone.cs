@@ -34,8 +34,9 @@ public class SpawnIcone : MonoBehaviour
 
             float timeValue = Mathf.Round(_time * 10f) / 10f;
             float LDValue = Mathf.Round(float.Parse(_valuesText[_i]) * 100f) / 100f;
+            float timeDelay = 9.5f / ((float)GameManager.Instance.clip.length / _speed);
 
-            if (timeValue >= LDValue - 3.3f)
+            if (timeValue >= LDValue - timeDelay)
             {
                 _i++;
                 Spawn();
