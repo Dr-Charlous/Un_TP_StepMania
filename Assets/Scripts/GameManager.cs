@@ -62,7 +62,7 @@ public class GameManager : MonoBehaviour
             }
         }
 
-        if (ActualI >= SpawnIcon.Valids.Length)
+        if (ActualI >= SpawnIcon.Valids.Length - 1)
         {
             GameWin();
         }
