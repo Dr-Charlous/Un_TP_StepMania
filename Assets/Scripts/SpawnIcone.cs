@@ -33,7 +33,7 @@ public class SpawnIcone : MonoBehaviour
             _time += Time.deltaTime;
 
             float timeValue = Mathf.Round(_time * 10f) / 10f;
-            float LDValue = Mathf.Round(float.Parse(_valuesText[_i]) * 10f) / 10f;
+            float LDValue = Mathf.Round(float.Parse(_valuesText[_i]) * 100f) / 100f;
 
             if (timeValue >= LDValue - 3.3f)
             {
