@@ -1978,6 +1978,7 @@ MonoBehaviour:
   - {fileID: 479668938950500813, guid: 75795678acf3c754ca738e4f6dbd93a5, type: 3}
   _iconeParent: {fileID: 1392530352}
   _song: {fileID: 1990756035}
+  _speed: 6
   Valids: []
 --- !u!1 &1480625180
 GameObject:

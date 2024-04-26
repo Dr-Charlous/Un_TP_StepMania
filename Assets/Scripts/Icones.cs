@@ -2,15 +2,15 @@ using UnityEngine;
 
 public class Icones : MonoBehaviour
 {
-    private float _speed;
+    public float Speed;
 
     private void Start()
     {
-        _speed = (float)GameManager.Instance.clip.length / 30f;
+        Speed = (float)GameManager.Instance.clip.length / Speed;
     }
 
     private void Update()
     {
-        transform.position += Vector3.down * _speed * Time.deltaTime;
+        transform.position += Vector3.down * Speed * Time.deltaTime;
     }
 }

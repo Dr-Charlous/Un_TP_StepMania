@@ -1,4 +1,5 @@
 using System.IO;
+using Unity.VisualScripting;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.UIElements;
@@ -8,6 +9,7 @@ public class SpawnIcone : MonoBehaviour
     [SerializeField] GameObject[] _iconePrefab;
     [SerializeField] Transform _iconeParent;
     [SerializeField] SongManager _song;
+    [SerializeField] float _speed;
 
     string[] _valuesText;
     float _time = 0;
@@ -50,6 +52,7 @@ public class SpawnIcone : MonoBehaviour
         int rnd = Random.Range(0, _iconePrefab.Length);
 
         Valids[_j] = Instantiate(_iconePrefab[rnd], _iconeParent);
+        Valids[_j].GetComponent<Icones>().Speed = _speed;
         _j++;
     }
 }
