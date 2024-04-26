@@ -1180,9 +1180,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83667291c4aef914db97d34e271727b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ValuePass: 0.5
+  ValueCorrect: 0.25
+  ValuePerfect: 0.1
+  _valueDamage: 0.1
+  _buttons:
+  - {fileID: 284473973}
+  - {fileID: 9019288750368310232}
+  - {fileID: 839457228850198511}
+  - {fileID: 7011993794748094622}
   clip: {fileID: 32900000, guid: d86a0cff74b8986459475c4962a31319, type: 3}
   Ui: {fileID: 1195421558}
   SpawnIcon: {fileID: 1392530353}
+  ActualI: 0
   LifePoints: 1
 --- !u!4 &1199774383
 Transform:

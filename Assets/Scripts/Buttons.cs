@@ -1,6 +1,7 @@
 using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
+using TreeEditor;
 using UnityEngine;
 using UnityEngine.SocialPlatforms.Impl;
 
@@ -8,19 +9,11 @@ public class Buttons : MonoBehaviour
 {
     [SerializeField] KeyCode _keyPressed;
 
-    [SerializeField] float _valuePass;
-    [SerializeField] float _valueCorrect;
-    [SerializeField] float _valuePerfect;
-
-    [SerializeField] float _valueDamage;
-
     private Transform _buttonObj;
-    private int _i;
 
     private void Start()
     {
         _buttonObj = this.transform;
-        _i = 0;
     }
 
     private void Update()
@@ -35,41 +28,44 @@ public class Buttons : MonoBehaviour
     void Check()
     {
         var icones = GameManager.Instance.SpawnIcon;
+        var valuePerfect = GameManager.Instance.ValuePerfect;
+        var valueCorrect = GameManager.Instance.ValueCorrect;
+        var valuePass = GameManager.Instance.ValuePass;
 
-        if (_i <= icones.Valids.Length && icones.Valids[_i] != null)
+        if (GameManager.Instance.ActualI <= icones.Valids.Length && icones.Valids[GameManager.Instance.ActualI] != null)
         {
             float buttonY = _buttonObj.position.y;
-            float iconeY = icones.Valids[_i].transform.position.y;
+            float iconeY = icones.Valids[GameManager.Instance.ActualI].transform.position.y;
             float difference = iconeY - buttonY;
             int scoreAdd = 0;
 
-            //Debug.Log($" button y : {buttonY}\n icone y : {iconeY}\n difference : {difference}");
+            Debug.Log($" button y : {buttonY}\n icone y : {iconeY}\n difference : {difference}");
 
-            if (difference > _valuePass)
+            if (difference > valuePass)
             {
                 Debug.Log("Raté");
-                Heal(0);
+                GameManager.Instance.Heal(0);
 
                 GameManager.Instance.Ui.ComboValue = 0;
             }
-            else if (difference < _valuePass && difference > -_valuePass)
+            else if (difference < valuePass && difference > -valuePass && icones.Valids[GameManager.Instance.ActualI].transform.position.x == transform.position.x)
             {
-                if (difference < _valuePerfect && difference > -_valuePerfect)
+                if (difference < valuePerfect && difference > -valuePerfect)
                 {
                     Debug.Log("Parfait chef");
-                    Heal(0.1f);
+                    GameManager.Instance.Heal(0.1f);
                     scoreAdd = 100;
                 }
-                else if (difference < _valueCorrect && difference > -_valueCorrect)
+                else if (difference < valueCorrect && difference > -valueCorrect)
                 {
                     Debug.Log("Ca va frero");
-                    Heal(0.05f);
+                    GameManager.Instance.Heal(0.05f);
                     scoreAdd = 50;
                 }
-                else if (difference < _valuePass && difference > -_valuePass)
+                else if (difference < valuePass && difference > -valuePass)
                 {
                     Debug.Log("Comment ca mon reuf ?");
-                    Heal(0.01f);
+                    GameManager.Instance.Heal(0.01f);
                     scoreAdd = 10;
                 }
 
@@ -82,21 +78,9 @@ public class Buttons : MonoBehaviour
                 GameManager.Instance.Ui.ComboValue++;
                 GameManager.Instance.Ui.UpdateUi();
 
-                Destroy(icones.Valids[_i]);
-                if (_i < icones.Valids.Length)
-                    _i++;
-            }
-            else
-            {
-                Heal(0);
-                
-                GameManager.Instance.Ui.UpdateUi();
-
-                GameManager.Instance.Ui.ComboValue = 0;
-
-                Destroy(icones.Valids[_i]);
-                if (_i < icones.Valids.Length)
-                    _i++;
+                Destroy(icones.Valids[GameManager.Instance.ActualI]);
+                if (GameManager.Instance.ActualI < icones.Valids.Length)
+                    GameManager.Instance.ActualI++;
             }
         }
     }
@@ -105,11 +89,5 @@ public class Buttons : MonoBehaviour
     {
         _buttonObj.DOComplete();
         _buttonObj.DOPunchScale(new Vector3(0.4f, 0.4f, 0.4f), 1);
-    }
-
-    void Heal(float value)
-    {
-        if (GameManager.Instance.LifePoints < 1)
-            GameManager.Instance.LifePoints += value + _valueDamage;
     }
 }
