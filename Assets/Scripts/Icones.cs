@@ -2,12 +2,8 @@ using UnityEngine;
 
 public class Icones : MonoBehaviour
 {
+    public GameManager Manager;
     public float Speed;
-
-    private void Start()
-    {
-        Speed = (float)GameManager.Instance.clip.length / Speed;
-    }
 
     private void Update()
     {

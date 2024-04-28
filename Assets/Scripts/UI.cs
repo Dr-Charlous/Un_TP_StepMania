@@ -12,6 +12,7 @@ public class UI : MonoBehaviour
     [SerializeField] SongManager _song;
     [SerializeField] Image _LifeBar;
 
+    public GameManager Manager;
     public GameObject WinScreen;
     public GameObject LoseScreen;
 
@@ -20,7 +21,7 @@ public class UI : MonoBehaviour
 
     private void Start()
     {
-        _videoPlayer.clip = GameManager.Instance.clip;
+        _videoPlayer.clip = Manager.clip;
 
         WinScreen.SetActive(false);
         LoseScreen.SetActive(false);
@@ -33,7 +34,7 @@ public class UI : MonoBehaviour
         _score.text = ScoreValue.ToString();
         _combo.text = ComboValue.ToString();
 
-        _LifeBar.fillAmount = GameManager.Instance.LifePoints;
+        _LifeBar.fillAmount = Manager.LifePoints;
 
         _score.transform.DOComplete();
         _score.transform.DOPunchScale(new Vector3(0.05f, 0.1f, 0), 1.5f);

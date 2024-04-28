@@ -11,6 +11,8 @@ public class SpawnIcone : MonoBehaviour
     [SerializeField] SongManager _song;
     [SerializeField] float _speed;
 
+    public GameManager Manager;
+
     string[] _valuesText;
     float _time = 0;
     int _i = 1;
@@ -20,7 +22,7 @@ public class SpawnIcone : MonoBehaviour
 
     void Start()
     {
-        _valuesText = File.ReadAllLines(AssetDatabase.GetAssetPath(GameManager.Instance.TextFileLD));
+        _valuesText = File.ReadAllLines(AssetDatabase.GetAssetPath(Manager.TextFileLD));
         _time = 0;
 
         Valids = new GameObject[_valuesText.Length];
@@ -34,7 +36,7 @@ public class SpawnIcone : MonoBehaviour
 
             float timeValue = Mathf.Round(_time * 10f) / 10f;
             float LDValue = Mathf.Round(float.Parse(_valuesText[_i]) * 100f) / 100f;
-            float timeDelay = 9.5f / ((float)GameManager.Instance.clip.length / _speed);
+            float timeDelay = 9.5f / ((float)Manager.clip.length / _speed);
 
             if (timeValue >= LDValue - timeDelay)
             {

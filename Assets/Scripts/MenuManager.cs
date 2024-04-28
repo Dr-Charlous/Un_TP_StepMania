@@ -9,4 +9,9 @@ public class MenuManager : MonoBehaviour
     {
         SceneManager.LoadScene(text);
     }
+
+    public void ChangeWindow(GameObject obj)
+    {
+        obj.SetActive(!obj.activeSelf);
+    }
 }

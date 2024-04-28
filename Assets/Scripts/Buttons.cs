@@ -5,6 +5,8 @@ public class Buttons : MonoBehaviour
 {
     [SerializeField] KeyCode _keyPressed;
 
+    public GameManager Manager;
+
     private Transform _buttonObj;
 
     private void Start()
@@ -23,15 +25,15 @@ public class Buttons : MonoBehaviour
 
     void Check()
     {
-        var icones = GameManager.Instance.SpawnIcon;
-        var valuePerfect = GameManager.Instance.ValuePerfect;
-        var valueCorrect = GameManager.Instance.ValueCorrect;
-        var valuePass = GameManager.Instance.ValuePass;
+        var icones = Manager.SpawnIcon;
+        var valuePerfect = Manager.ValuePerfect;
+        var valueCorrect = Manager.ValueCorrect;
+        var valuePass = Manager.ValuePass;
 
-        if (GameManager.Instance.ActualI <= icones.Valids.Length && icones.Valids[GameManager.Instance.ActualI] != null)
+        if (Manager.ActualI <= icones.Valids.Length && icones.Valids[Manager.ActualI] != null)
         {
             float buttonY = _buttonObj.position.y;
-            float iconeY = icones.Valids[GameManager.Instance.ActualI].transform.position.y;
+            float iconeY = icones.Valids[Manager.ActualI].transform.position.y;
             float difference = iconeY - buttonY;
             int scoreAdd = 0;
 
@@ -39,47 +41,46 @@ public class Buttons : MonoBehaviour
 
             if (difference > valuePass)
             {
-                Debug.Log("Raté");
-                GameManager.Instance.Heal(0);
+                Manager.Heal(0);
 
-                GameManager.Instance.Ui.ComboValue = 0;
+                Manager.Ui.ComboValue = 0;
 
-                GameManager.Instance.Particules("Miss", Color.red);
+                Manager.Particules("Miss", Color.red);
             }
-            else if (difference < valuePass && difference > -valuePass && icones.Valids[GameManager.Instance.ActualI].transform.position.x == transform.position.x)
+            else if (difference < valuePass && difference > -valuePass && icones.Valids[Manager.ActualI].transform.position.x == transform.position.x)
             {
                 if (difference < valuePerfect && difference > -valuePerfect)
                 {
-                    GameManager.Instance.Particules("Perfect", Color.yellow);
-                    GameManager.Instance.Heal(0.3f);
+                    Manager.Particules("Perfect", Color.yellow);
+                    Manager.Heal(0.3f);
                     scoreAdd = 100;
                 }
                 else if (difference < valueCorrect && difference > -valueCorrect)
                 {
-                    GameManager.Instance.Particules("Cool", Color.green);
-                    GameManager.Instance.Heal(0.2f);
+                    Manager.Particules("Cool", Color.green);
+                    Manager.Heal(0.2f);
                     scoreAdd = 50;
                 }
                 else if (difference < valuePass && difference > -valuePass)
                 {
-                    GameManager.Instance.Particules("Correct", Color.blue);
-                    GameManager.Instance.Heal(0.1f);
+                    Manager.Particules("Correct", Color.blue);
+                    Manager.Heal(0.1f);
                     scoreAdd = 10;
                 }
 
-                if (GameManager.Instance.LifePoints == 1)
+                if (Manager.LifePoints == 1)
                 {
                     scoreAdd *= 2;
                 }
 
-                GameManager.Instance.Ui.ScoreValue += scoreAdd;
-                GameManager.Instance.Ui.ComboValue++;
+                Manager.Ui.ScoreValue += scoreAdd;
+                Manager.Ui.ComboValue++;
 
-                Destroy(icones.Valids[GameManager.Instance.ActualI]);
-                if (GameManager.Instance.ActualI < icones.Valids.Length)
-                    GameManager.Instance.ActualI++;
+                Destroy(icones.Valids[Manager.ActualI]);
+                if (Manager.ActualI < icones.Valids.Length)
+                    Manager.ActualI++;
 
-                GameManager.Instance.Ui.UpdateUi();
+                Manager.Ui.UpdateUi();
             }
         }
     }
